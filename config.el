@@ -48,14 +48,14 @@
 ;; Usage: [[zendesk:2753]] or [[redmine:7481][My text]]
 (setq org-link-abbrev-alist
       '(
-        ("cfe-func" . "https://docs.cfengine.com/docs/master/reference-functions-")
-        ("zendesk" . "https://cfengine.zendesk.com/agent/tickets/")
-        ("redmine" . "https://dev.cfengine.com/issues/")
-        ("core-pr" . "https://github.com/cfengine/core/pull/")
-        ("mpf-pr" . "https://github.com/cfengine/masterfiles/pull/")
-        ("core-commit" . "https://github.com/cfengine/core/commit/")
-        ("mpf-commit" . "https://github.com/cfengine/masterfiles/commit/")
-        ("jira" . "https://tracker.mender.io/browse/")))
+        ;; ("cfe-func" . "https://docs.cfengine.com/docs/master/reference-functions-")
+        ;; ("zendesk" . "https://cfengine.zendesk.com/agent/tickets/")
+        ;; ("redmine" . "https://dev.cfengine.com/issues/")
+        ;; ("core-pr" . "https://github.com/cfengine/core/pull/")
+        ;; ("mpf-pr" . "https://github.com/cfengine/masterfiles/pull/")
+        ;; ("core-commit" . "https://github.com/cfengine/core/commit/")
+        ;; ("mpf-commit" . "https://github.com/cfengine/masterfiles/commit/")
+        ("jira" . "https://jira.collegeboard.org/secure/Dashboard.jspa")))
 
 (defvar my/org-meeting-template-generic "* %u %^{Meeting about} %^g
 CREATED: %U
@@ -73,7 +73,7 @@ CREATED: %U
 %?
 
 *Attendees:*
-  - Nick Anderson
+  - Chris Meadows
   -
 
 ** Info
@@ -85,14 +85,12 @@ CREATED: %U
 
 " "Meeting Template - Customer Status Check-in")
 
-(defvar my/org-meeting-template-grooming "* %u Meeting About CFEngine Grooming :internal_meeting:
+(defvar my/org-meeting-template-grooming "* %u Meeting About Pivot grooming :internal_meeting:
 CREATED: %U
 %?
 *Agenda:*
-- [[https://tracker.mender.io/issues/?filter=11300][Review New customer issues]]
-- [[https://tracker.mender.io/secure/RapidBoard.jspa?rapidView=34][Review Progress on CFEngine Epics]]
-- [[https://tracker.mender.io/issues/?filter=11205][Review Understanding of Next Bugs]]
-- [[https://tracker.mender.io/secure/RapidBoard.jspa?rapidView=11&view=planning&epics=visible][Review CFEngine PM Backlog]]
+- [[https://jira.collegeboard.org/secure/RapidBoard.jspa?rapidView=2322][Review Progress on the sprint]]
+- [[https://jira.collegeboard.org/secure/RapidBoard.jspa?rapidView=2322&view=planning.nodetail&issueLimit=100][Review Backlog]]
 
 ** Notes
 
@@ -100,7 +98,7 @@ CREATED: %U
 
 ;; BEGIN Capture Templates
     ;; I picked up this neat trick from the Venerable Sacha Chua
-    (defvar my/org-meeting-template-planning "* %u Meeting About CFEngine Planning   %^G
+(defvar my/org-meeting-template-planning "* %u Meeting About Pivot Planning   %^G
 CREATED: %U
 
 *Agenda:*
@@ -113,16 +111,18 @@ CREATED: %U
 
 " "Meeting Template - Planning")
 
-    (defvar my/org-meeting-template-standup "* %u CFEngine Standup  :internal_meeting:
+    (defvar my/org-meeting-template-standup "* %u Pivot Standup  :internal_meeting:
 CREATED: %U
 
-** Aleksei
-** Igor
-** Ole
-** Vratislav
-** Nils 
-** Craig
-** Nick
+** Steve
+** Sam
+** Misha
+** Dan
+** Chris
+** Andrea
+** Catherine
+** Suba
+** David
 
 " "Meeting Template - Standup")
 
@@ -131,7 +131,7 @@ CREATED: %U
 
 *Attendees:*
 
- - [X] Nick Anderson
+ - [X] Chris Meadows
  - [ ] %?
 
 
@@ -153,7 +153,6 @@ CREATED: %U
 
     (defvar my/org-respond-email-capture-template "** TODO [#B] Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n\n")
 
-    (defvar my/org-capture-support "** TODO [#A] [[zendesk:%^{ISSUE}]]: %^{DESCRIPTION} %^G\n\n%?\n")
     (defvar my/org-capture-jira "** TODO [#B] [[jira:%^{ISSUE}]]: %^{DESCRIPTION} %^G\n\n%?\n")
 
 
@@ -184,15 +183,15 @@ CREATED: %U
         ("d" "Daily Review" entry (file "~/org/daily_reviews.org") ,my/org-daily-review-capture-template :clock-in t :clock-resume t :append t)
 
         ("m" "Meetings" )
-        ("ms" "Meeting - Standup" entry (file "~/org/cfengine/meetings.org" )
+        ("ms" "Meeting - Standup" entry (file "~/org/cb/meetings.org" )
          ,my/org-meeting-template-standup :clock-in t :clock-resume t :append t :empty-lines-after 1)
-        ("mc" "Meeting - Customer Status Check-in" entry (file "~/org/cfengine/meetings.org" )
+        ("mc" "Meeting - Customer Status Check-in" entry (file "~/org/cb/meetings.org" )
          ,my/org-meeting-template-customer-status :clock-in t :clock-resume t :append t :empty-lines-after 1)
-        ("mg" "Meeting - Grooming" entry (file "~/org/cfengine/meetings.org" )
+        ("mg" "Meeting - Grooming" entry (file "~/org/cb/meetings.org" )
          ,my/org-meeting-template-grooming :clock-in t :clock-resume t :append t :empty-lines-after 1)
-        ("mp" "Meeting - Planning/Review" entry (file "~/org/cfengine/meetings.org" )
+        ("mp" "Meeting - Planning/Review" entry (file "~/org/cb/meetings.org" )
          ,my/org-meeting-template-planning :clock-in t :clock-resume t :append t :empty-lines-after 1)
-        ("mm" "Meeting - Generic" entry (file "~/org/cfengine/meetings.org" )
+        ("mm" "Meeting - Generic" entry (file "~/org/cb/meetings.org" )
          ,my/org-meeting-template-generic :clock-in t :clock-resume t :append t :empty-lines-after 1)
         ))
 ;; END Capture templates
@@ -214,17 +213,6 @@ CREATED: %U
    ;; (plantuml . t)
    ;; (perl . t))
    ))
-
-;; This is no longer needed. It's handled by the cfengine layer automatically if
-;; it sees the org layer is also used.
-;; https://github.com/syl20bnr/spacemacs/pull/11528
-;; (when (configuration-layer/layer-usedp 'cfengine)
-;;   ;;(require 'ob-cfengine3) ;; I have problems with capture templates if I don't
-;;   ;; use this before capturing or require it.
-
-;;   (append org-babel-load-languages
-;;           '((cfengine3 . t)))
-;;   )
 
 ;; BEGIN exports
 ;; Disable exporting subscripts (I use a lot of underscores, and they are never for subscript)
@@ -249,35 +237,35 @@ CREATED: %U
          :publishing-function org-html-publish-to-pdf
          :headline-levels 1
          :autopreamble nil)
-        ("cfengine-html"
-         :base-directory "~/org/cfengine/"
+        ("cb-html"
+         :base-directory "~/org/cb/"
          :base-extension "org"
-         :publishing-directory "~/CFEngine/Google Drive/nicks_org"
+         :publishing-directory "~/cb/Google Drive/chris_org"
          :recursive t
          :publishing-function org-html-publish-to-html
          :headline-levels 4
          :autopreamble t
          :eval "never-export")
-        ("cfengine-org"
-         :base-directory "~/org/cfengine/"
+        ("cb-org"
+         :base-directory "~/org/cb/"
          :base-extension "org"
-         :publishing-directory "~/CFEngine/Google Drive/nicks_org"
+         :publishing-directory "~/cb/Google Drive/chris_org"
          :recursive t
          :publishing-function org-org-publish-to-org
          :headline-levels 4
          :autopreamble t)
-        ("cfengine-pdf"
-         :base-directory "~/org/cfengine/"
+        ("cb-pdf"
+         :base-directory "~/org/cb/"
          :base-extension "org"
-         :publishing-directory "~/CFEngine/Google Drive/nicks_org"
+         :publishing-directory "~/cb/Google Drive/chris_org"
          :recursive nil
          :publishing-function org-latex-publish-to-pdf
          :headline-levels 4
          :autopreamble t)
-        ("cfengine-txt"
-         :base-directory "~/org/cfengine/"
+        ("cb-txt"
+         :base-directory "~/org/cb/"
          :base-extension "org"
-         :publishing-directory "~/CFEngine/Google Drive/nicks_org"
+         :publishing-directory "~/cb/Google Drive/chris_org"
          :recursive t
          :publishing-function org-ascii-publish-to-utf8
          :headline-levels 4
@@ -290,7 +278,7 @@ CREATED: %U
 (setq org-agenda-span 'day)
 
 (setq org-agenda-files
-      '("~/org" "~/org/cfengine" "~/org/cfengine/customers" "~/.org-jira"))
+      '("~/org" "~/org/cb" "~/org/cb/customers" "~/.org-jira"))
 ;; It's hard to see them (at least with the default color). Also this is a
 ;; reccomended change to speed up the agenda (not that it's too slow for me).
 (setq org-agenda-dim-blocked-tasks nil)
@@ -311,7 +299,7 @@ CREATED: %U
 (setq org-download-method 'attach)
 
 (when (configuration-layer/package-used-p 'org-jira)
-           (setq jiralib-url "https://tracker.mender.io:443")
+           (setq jiralib-url "https://jira.collegeboard.org:443")
             (setq org-jira-working-dir "~/.org-jira"))
 
 )
